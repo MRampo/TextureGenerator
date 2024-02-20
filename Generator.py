@@ -56,10 +56,13 @@ class Generator(nn.Module):
         
         self.encoder = Encoder(latent_dim)
         self.decoder = Decoder(latent_dim)
+        self.skip = nn.ConvTranspose2d(latent_dim, latent_dim, 4, 2, 1)
         
     def forward(self, x):
         latent_code = self.encoder(x)
-        reconstructed_img = self.decoder(latent_code)
+        latent_code_skip = self.skip(latent_code)
+        combined_code = latent_code + latent_code_skip
+        reconstructed_img = self.decoder(combined_code)
         return reconstructed_img
 
 # Example usage:
