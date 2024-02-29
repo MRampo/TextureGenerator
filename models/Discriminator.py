@@ -6,35 +6,28 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
 
         self.model = nn.Sequential(
-            # Input: 3x512x512
-            # First Down-sampling layer: 3x512x512 -> 64x256x256
-            # Second Down-sampling layer: 64x256x256 -> 128x128x128
-            # Third Down-sampling layer: 128x128x128 -> 256x64x64
-            # Fourth Down-sampling layer: 256x64x64 -> 512x32x32
-            # Final layer: 512x32x32 -> 
-            
-            nn.Conv2d(3, 64, 4, 2, 1),  
+            # Input: 3x256x256
+            nn.Conv2d(3, 64, 4, 2, 1),  # Output: 64x128x128
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(64, 128, 4, 2, 1),  
+            nn.Conv2d(64, 128, 4, 2, 1),  # Output: 128x64x64
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(128, 256, 4, 2, 1),  
+            nn.Conv2d(128, 256, 4, 2, 1),  # Output: 256x32x32
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(256, 512, 4, 2, 1),  
+            nn.Conv2d(256, 512, 4, 2, 1),  # Output: 512x16x16
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
-
-            # Final layer to get a single output value
-            nn.Conv2d(512, 1, 4, 1, 0),  
-            nn.Sigmoid()
         )
 
-    def forward(self, x):
-        output = self.model(x)
-        # Flatten the output for binary classification
-        return output.view(-1, 1).squeeze(1)
+        # Adjust the fully connected layer to account for the new feature map size
+        self.fc = nn.Linear(512 * 16 * 16, 1)  # Adjusted for 512x16x16 feature maps
 
+    def forward(self, x):
+        x = self.model(x)
+        x = torch.flatten(x, start_dim=1)  # Flatten the features for each image
+        x = self.fc(x)  # Output: [batch_size, 1]
+        return torch.sigmoid(x)  # Ensure output is a probability
