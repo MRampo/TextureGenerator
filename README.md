@@ -15,5 +15,5 @@ The training procedure involves creating random crops of the original texture an
 ## Some Results
 ![grass_modello](https://github.com/MRampo/TextureGenerator/assets/37956397/2628ec08-cbb6-4c3f-bd20-b71215f71dd5)
 ![Water](https://github.com/MRampo/TextureGenerator/assets/37956397/b999d208-e5fc-45b4-a8c1-3ef0eb5f8b3e)
-![Wood](https://github.com/MRampo/TextureGenerator/assets/37956397/a2fcc9eb-c47e-47b7-8051-4d4afb429287)
+![Wood2](https://github.com/MRampo/TextureGenerator/assets/37956397/0b343c27-81e6-4be2-9d26-5bed58bcfa20)
 ![dirt](https://github.com/MRampo/TextureGenerator/assets/37956397/07952aa7-6d26-44c5-91bb-56a6057be61f)
