@@ -9,6 +9,13 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 from torch.cuda.amp import GradScaler, autocast
 
+'''
+The original training file was a .ipynb notebook since this project has been trained on colab. This file is a conversion of that original file
+
+'''
+
+
+
 # Importing the models and dataset class
 from models.Generator import Generator
 from models.Discriminator import Discriminator
