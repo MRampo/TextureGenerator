@@ -7,8 +7,8 @@ This project explores a modern approach to texture synthesis using Generative Ad
 The methodology combines various techniques refined over the years:
 Architecture: 
 
-- The generator is an encoder-decoder architecture based on Johnson et al. (2016) with residual blocks to capture large-scale non-stationary behavior
-- The discriminator is a fully convolutional network based on Isola et al. (2016).
+- The generator is an encoder-decoder architecture based on Johnson et al. (2016) (see pdf) with residual blocks to capture large-scale non-stationary behavior
+- The discriminator is a fully convolutional network based on Isola et al. (2016) (see pdf).
 
 ## Training
 The training procedure involves creating random crops of the original texture and using them as inputs for the generator. The loss function combines adversarial loss (Goodfellow et al., 2014) and style loss (Gatys et al., 2015) computed from a pre-trained VGG-19 model.
